@@ -8,55 +8,55 @@ public class UserRegistration {
 
 	}
 
-	public String firstname(String firstName) {
+	public String firstname(String firstName) throws CustomException {
 		Pattern p = Pattern.compile("\\b([A-Z]\\w*)\\b");
 		Matcher matcher = p.matcher(firstName);
 		if (matcher.find()) {
 			return firstName;
 		} else {
-			return "Invalid Character";
+			throw new CustomException("Invalid firstName");
 		}
 
 	}
 
-	public String lastname(String lastName) {
+	public String lastname(String lastName) throws CustomException {
 		Pattern p = Pattern.compile("\\b([A-Z]\\w*)\\b");
 		Matcher matcher = p.matcher(lastName);
 		if (matcher.find()) {
 			return lastName;
 		} else {
-			return "Invalid Character";
+			throw new CustomException("Invalid lastName");
 		}
 	}
 
-	public String validEmail(String email) {
+	public String validEmail(String email) throws CustomException {
 		String regex = ("^(.+)@(.+)$");
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
 		if (matcher.find()) {
 			return email;
 		} else {
-			return "Invalid email";
+			throw new CustomException("Invalid email");
 		}
 	}
 
-	public String preDefinedMobileFormat(String mobileNumber) {
-		Pattern pattern = Pattern.compile("[1-9]{2}[ \\S\\s]{1}+[1-9]*]");
+	public String preDefinedMobileFormat(String mobileNumber) throws CustomException {
+		Pattern pattern = Pattern.compile("^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$");
 		Matcher matcher = pattern.matcher(mobileNumber);
 		if (matcher.find()) {
 			return mobileNumber;
 		} else {
-			return "Invalid Mobile format";
+			throw new CustomException("Invalid Mobile format");
 		}
 	}
 
-	public String min_8_char(String password) {
+	public String min_8_char(String password) throws CustomException {
 		Pattern pattern = Pattern.compile("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}");
 		Matcher matcher = pattern.matcher(password);
 		if (matcher.find()) {
 			return password;
 		} else {
-			return "Invalid Password";
+			throw new CustomException("Invalid Password");
 		}
 	}
 }
